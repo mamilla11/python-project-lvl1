@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 
 import brain_games.cli
-import random
+from random import randint
+from operator import mul, add, sub
 
 
 TRIES = 3
 MIN_GAME_VAL = 1
-MAX_GAME_VAL = 10000
+MAX_GAME_VAL = 200
+GAME_OPERATORS = {'*': mul, '-': sub, '+': add}
 
 
 def print_rules():
-    print('Answer "yes" if the number is even, otherwise answer "no".')
+    print('What is the result of the expression?')
 
 
 def check_answer(answer, correct_answer):
@@ -22,18 +24,18 @@ def check_answer(answer, correct_answer):
     return correct
 
 
-def get_correct_answer(value):
-    if value % 2 == 0:
-        return 'yes'
-    else:
-        return 'no'
+def get_correct_answer(game_value1, game_value2, game_op):
+    return GAME_OPERATORS[game_op](game_value1, game_value2)
 
 
 def game():
-    game_value = random.randint(MIN_GAME_VAL, MAX_GAME_VAL)
-    correct_answer = get_correct_answer(game_value)
+    game_value1 = randint(MIN_GAME_VAL, MAX_GAME_VAL)
+    game_value2 = randint(MIN_GAME_VAL, MAX_GAME_VAL)
+    game_op = list(GAME_OPERATORS.keys())[randint(0, len(GAME_OPERATORS) - 1)]
 
-    print(f'Question: {game_value}')
+    correct_answer = get_correct_answer(game_value1, game_value2, game_op)
+
+    print(f'Question: {game_value1} {game_op} {game_value2}')
     answer = brain_games.cli.get_user_answer()
 
     return check_answer(answer, correct_answer)
