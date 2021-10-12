@@ -9,7 +9,7 @@ MAX_GAME_VAL = 100
 def get_correct_answer(value):
     dividers = []
 
-    for i in range(1, value):
+    for i in range(1, value + 1):
         if value % i == 0:
             dividers.append(i)
 
