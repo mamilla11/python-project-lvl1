@@ -6,13 +6,6 @@ MIN_GAME_VAL = 1
 MAX_GAME_VAL = 100
 
 
-def get_correct_answer(value):
-    if value % 2 == 0:
-        return 'yes'
-    else:
-        return 'no'
-
-
 def get_correct_answer(game_value1, game_value2):
     max_div = 1
     for i in range(2, min(game_value1, game_value2) + 1):
